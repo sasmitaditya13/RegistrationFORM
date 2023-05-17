@@ -26,6 +26,7 @@ function check(){
     const regpwd = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     if(uname === ''){
         failf(name1,"Username cannot be blank");
+        s=0;
         
     }
     else {
@@ -37,6 +38,7 @@ function check(){
     }
     else{
         failf(age,"Invalid age");
+        s=0;
     }
     if(/^\w+$/.test(gender.value))
     {
@@ -44,6 +46,7 @@ function check(){
     }
     else{
         failf(gender,"Invalid input");
+        s=0;
     }
     if(regem.test(email.value) || regem2.test(email.value))
     {
@@ -51,6 +54,7 @@ function check(){
     }
     else{
         failf(email,"Email must be of the form abc@xyz.pqr");
+        s=0;
     }
     if(regph.test(phn.value))
     {
@@ -58,9 +62,11 @@ function check(){
     }
     else{
         failf(phn,"Invalid phone number");
+        s=0;
     }
     if(city.value.trim() === ''){
         failf(city,"City name cannot be blank");
+        s=0;
         
     }
     else {
@@ -71,6 +77,7 @@ function check(){
         
     }
     else {
+        s=0;
         failf(pwd,"Password must have minimum eight characters,one uppercase letter, one lowercase letter and one number");
     }
     if(pwd2.value === pwd.value && pwd2.value.trim() != ''){
@@ -78,6 +85,7 @@ function check(){
     }
     else{
         failf(pwd2,"Passwords must be same");
+        s=0;
     }
     if(/^\d+$/.test(mains.value))
     {
@@ -90,6 +98,7 @@ function check(){
         failf(mains,"Invalid Rank");
         i=1;
         dropdown();
+        s=0;
     }
     if(/^\d+$/.test(adva.value))
     {
@@ -102,6 +111,7 @@ function check(){
         failf(adva,"Invalid Rank");
         i=1;
         dropdown();
+        s=0;
     }
     if(s==1)
     {
@@ -120,7 +130,7 @@ function failf(elem,err)
     const errormes = elem.parentElement.querySelector('small');
     errormes.innerText= err;
     elem.parentElement.className = 'input fail';
-    s=0;
+    
     
     
 }

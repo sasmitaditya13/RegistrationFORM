@@ -11,6 +11,7 @@ const edu=document.getElementsByClassName('drop');
 
 const mains=document.getElementById('mains');
 const adva=document.getElementById('advance');
+var s=1;
 var i=1;
 form.addEventListener('submit',(e)=>{
     e.preventDefault();
@@ -19,7 +20,8 @@ form.addEventListener('submit',(e)=>{
 
 function check(){
     const uname= name1.value.trim();
-    const regem= /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const regem= /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.{1}[a-zA-Z0-9-]+$/;
+    const regem2= /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.{1}[a-zA-Z0-9-]+\.{1}[a-zA-Z0-9-]+\.{1}[a-zA-Z0-9-]+$/;
     const regph = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
     const regpwd = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     if(uname === ''){
@@ -43,12 +45,12 @@ function check(){
     else{
         failf(gender,"Invalid input");
     }
-    if(regem.test(email.value))
+    if(regem.test(email.value) || regem2.test(email.value))
     {
         successf(email);
     }
     else{
-        failf(email,"Invalid email");
+        failf(email,"Email must be of the form abc@xyz.pqr");
     }
     if(regph.test(phn.value))
     {
@@ -101,6 +103,15 @@ function check(){
         i=1;
         dropdown();
     }
+    if(s==1)
+    {
+        formreset();
+        s=1;
+    }
+    else{
+        alert("Please recheck");
+        s=1;
+    }
 
 }
 
@@ -109,12 +120,14 @@ function failf(elem,err)
     const errormes = elem.parentElement.querySelector('small');
     errormes.innerText= err;
     elem.parentElement.className = 'input fail';
+    s=0;
     
     
 }
 function successf(elem)
 {
     elem.parentElement.className = 'input success';
+    
 }
 
 
@@ -162,13 +175,14 @@ function checkgender(){
     }
 }
 function checkemail(){
-    const regem= /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if(regem.test(email.value))
+    const regem= /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.{1}[a-zA-Z0-9-]+$/;
+    const regem2= /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.{1}[a-zA-Z0-9-]+\.{1}[a-zA-Z0-9-]+\.{1}[a-zA-Z0-9-]+$/;
+    if(regem.test(email.value) || regem2.test(email.value))
     {
         successf(email);
     }
     else{
-        failf(email,"Email must be of the form abc@xyz");
+        failf(email,"Email must be of the form abc@xyz.pqr");
     }
 }
 function checkphn(){
@@ -238,4 +252,20 @@ function checkadv(){
         i=1;
         dropdown();
     }
+}
+function formreset()
+{
+    alert("Successfully registered");
+    form.reset();
+    email.parentElement.className = 'input';
+    pwd.parentElement.className = 'input';
+    name1.parentElement.className = 'input';
+    age.parentElement.className = 'input';
+    gender.parentElement.className = 'input';
+    phn.parentElement.className = 'input';
+    city.parentElement.className = 'input';
+    pwd2.parentElement.className = 'input';
+    mains.parentElement.className = 'input';
+    adva.parentElement.className = 'input';
+
 }
